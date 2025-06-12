@@ -1,10 +1,10 @@
 #include "Header.h"
 
-//Чтение файла
-void Tree::ReadFile(string Filename) {                  //Обрабатываем файл
+//Р§С‚РµРЅРёРµ С„Р°Р№Р»Р°
+void Tree::ReadFile(string Filename) {                  //РћР±СЂР°Р±Р°С‚С‹РІР°РµРј С„Р°Р№Р»
     fstream file(Filename);
     if (!file.is_open()) {
-        throw "Файл не открылся";
+        throw "Г”Г Г©Г« Г­ГҐ Г®ГІГЄГ°Г»Г«Г±Гї";
         exit(0);
     }
 
@@ -12,27 +12,27 @@ void Tree::ReadFile(string Filename) {                  //Обрабатываем файл
     vector<int> Letter;
     string a;
     Veify verify;
-    getline(file, a);                                   //Считываем первое число файла (Количество строк или гнезд)
+    getline(file, a);                                   //РЎС‡РёС‚С‹РІР°РµРј РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ С„Р°Р№Р»Р° (РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє РёР»Рё РіРЅРµР·Рґ)
     if (!verify.Number(a)) {
         cin.ignore();
-        cout << "Ошибка. На ввод поступило что-то не то";
+        cout << "ГЋГёГЁГЎГЄГ . ГЌГ  ГўГўГ®Г¤ ГЇГ®Г±ГІГіГЇГЁГ«Г® Г·ГІГ®-ГІГ® Г­ГҐ ГІГ®";
         exit(0);
     }
 
     int Count = stoi(a);
 
-    for (int i = 0; i < Count; i++) {                   //Идем по всем строкам
+    for (int i = 0; i < Count; i++) {                   //РРґРµРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј
         string b, c;
-        file >> b;                                      //Считываем первое число каждой строки (Количество соседей у этого гнезда)
+        file >> b;                                      //РЎС‡РёС‚С‹РІР°РµРј РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРё (РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРѕСЃРµРґРµР№ Сѓ СЌС‚РѕРіРѕ РіРЅРµР·РґР°)
         if (!verify.Number(b)) {
-            cout << "Ошибка. На ввод поступило что-то не то";
+            cout << "ГЋГёГЁГЎГЄГ . ГЌГ  ГўГўГ®Г¤ ГЇГ®Г±ГІГіГЇГЁГ«Г® Г·ГІГ®-ГІГ® Г­ГҐ ГІГ®";
             exit(0);
         }
         int NeighborCount = stoi(b);
 
-        file >> c;                                      //Считываем второе число каждой строки (Количество писем в это гнездо)
+        file >> c;                                      //РЎС‡РёС‚С‹РІР°РµРј РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРё (РљРѕР»РёС‡РµСЃС‚РІРѕ РїРёСЃРµРј РІ СЌС‚Рѕ РіРЅРµР·РґРѕ)
         if (!verify.Number(c)) {
-            cout << "Ошибка. На ввод поступило что-то не то";
+            cout << "ГЋГёГЁГЎГЄГ . ГЌГ  ГўГўГ®Г¤ ГЇГ®Г±ГІГіГЇГЁГ«Г® Г·ГІГ®-ГІГ® Г­ГҐ ГІГ®";
             exit(0);
         }
         int Letters = stoi(c);
@@ -41,19 +41,19 @@ void Tree::ReadFile(string Filename) {                  //Обрабатываем файл
 
         for (int j = 0; j < NeighborCount; j++) {
             string d;
-            file >> d;                                  //Считываем всех соседей (Считали их количество как первое число в строке)
+            file >> d;                                  //РЎС‡РёС‚С‹РІР°РµРј РІСЃРµС… СЃРѕСЃРµРґРµР№ (РЎС‡РёС‚Р°Р»Рё РёС… РєРѕР»РёС‡РµСЃС‚РІРѕ РєР°Рє РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ РІ СЃС‚СЂРѕРєРµ)
             if (!verify.Number(d)) {
-                cout << "Ошибка. На ввод поступило что-то не то";
+                cout << "ГЋГёГЁГЎГЄГ . ГЌГ  ГўГўГ®Г¤ ГЇГ®Г±ГІГіГЇГЁГ«Г® Г·ГІГ®-ГІГ® Г­ГҐ ГІГ®";
                 exit(0);
             }
 
             int Neighbor = stoi(d);
-            Neighbors[j] = Neighbor;                    //Заносим в массив Neighbours
+            Neighbors[j] = Neighbor;                    //Р—Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ Neighbours
         }
 
-        //Надо построить дерево:
-        //1. Поставить вершину 1 как корень и добавить соседей, номера которых в массиве (Childrens), а также присвоить количество писем (Letters)
-        //2. Сделать аналогично для 2 и последующих вершин
+        //РќР°РґРѕ РїРѕСЃС‚СЂРѕРёС‚СЊ РґРµСЂРµРІРѕ:
+        //1. РџРѕСЃС‚Р°РІРёС‚СЊ РІРµСЂС€РёРЅСѓ 1 РєР°Рє РєРѕСЂРµРЅСЊ Рё РґРѕР±Р°РІРёС‚СЊ СЃРѕСЃРµРґРµР№, РЅРѕРјРµСЂР° РєРѕС‚РѕСЂС‹С… РІ РјР°СЃСЃРёРІРµ (Childrens), Р° С‚Р°РєР¶Рµ РїСЂРёСЃРІРѕРёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РїРёСЃРµРј (Letters)
+        //2. РЎРґРµР»Р°С‚СЊ Р°РЅР°Р»РѕРіРёС‡РЅРѕ РґР»СЏ 2 Рё РїРѕСЃР»РµРґСѓСЋС‰РёС… РІРµСЂС€РёРЅ
 
         if (i == 0) {
             root = new TreeNode(1);
@@ -70,7 +70,7 @@ void Tree::ReadFile(string Filename) {                  //Обрабатываем файл
     file.close();
 }
 
-//Найти нужный узел (С нужным номером)
+//РќР°Р№С‚Рё РЅСѓР¶РЅС‹Р№ СѓР·РµР» (РЎ РЅСѓР¶РЅС‹Рј РЅРѕРјРµСЂРѕРј)
 Tree::TreeNode* Tree::FindNode(int Number, TreeNode* node) {
     if (!Number)
         return nullptr;
@@ -86,7 +86,7 @@ Tree::TreeNode* Tree::FindNode(int Number, TreeNode* node) {
     return nullptr;
 }
 
-//Добавить элемент в список
+//Р”РѕР±Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ РґРµСЂРµРІРѕ
 void Tree::AddNode(int Parent, int Children, int Letters) {
     TreeNode* parent = FindNode(Parent, root);
 
@@ -102,7 +102,7 @@ void Tree::AddNode(int Parent, int Children, int Letters) {
     parent->Childrens.push_back(NewNode);
 }
 
-//Доставка почты и подсчет извинений
+//Р”РѕСЃС‚Р°РІРєР° РїРѕС‡С‚С‹ Рё РїРѕРґСЃС‡РµС‚ РёР·РІРёРЅРµРЅРёР№
 int Tree::Deliver(vector<int>& Letters) {
     int apologies = 0;
     for (int i = 0; i < Letters.size(); i++) {
@@ -110,7 +110,6 @@ int Tree::Deliver(vector<int>& Letters) {
             TreeNode* node = FindNode(i + 1, root);
 
             if (node) {
-                //Идем обратно от этого элемента до корня
                 for (TreeNode* current = node; current != nullptr; current = current->Parent) {
                     if (current->Letters == 0 && !current->Visited) {
                         apologies++;
@@ -125,17 +124,17 @@ int Tree::Deliver(vector<int>& Letters) {
     return apologies;
 }
 
-//Вывод результата в файл
+//Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ С„Р°Р№Р»
 void Tree::PrintInFile(int k, string outputFile) {
     ofstream file(outputFile);
 
     file << k;
 }
 
-//Проверка на число
+//РџСЂРѕРІРµСЂРєР° РЅР° С‡РёСЃР»Рѕ
 bool Veify::Number(string& x) {
     if (x.empty()) {
-        throw "Пустая строка на ввод";
+        throw "ГЏГіГ±ГІГ Гї Г±ГІГ°Г®ГЄГ  Г­Г  ГўГўГ®Г¤";
         return false;
     }
 
