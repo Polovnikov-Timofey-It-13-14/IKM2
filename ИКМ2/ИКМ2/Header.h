@@ -8,11 +8,11 @@ using namespace std;
 class Tree {
 private:
     struct TreeNode {
-        int Number;                         //Номер гнезда
-        vector<TreeNode*> Childrens;        //"Прямые" потомки этого гнезда
-        TreeNode* Parent;                   //Родитель
-        int Letters;                        //Количество писем в гнезде
-        bool Visited;                       //Флаг (Посещано ли гнездо)
+        int Number;                         //РќРѕРјРµСЂ РіРЅРµР·РґР°
+        vector<TreeNode*> Childrens;        //"РџСЂСЏРјС‹Рµ" РїРѕС‚РѕРјРєРё СЌС‚РѕРіРѕ РіРЅРµР·РґР°
+        TreeNode* Parent;                   //Р РѕРґРёС‚РµР»СЊ
+        int Letters;                        //РљРѕР»РёС‡РµСЃС‚РІРѕ РїРёСЃРµРј РІ РіРЅРµР·РґРµ
+        bool Visited;                       //Р¤Р»Р°Рі (РџРѕСЃРµС‰Р°РЅРѕ Р»Рё РіРЅРµР·РґРѕ)
 
         TreeNode(int num, TreeNode* parent = nullptr) : Number(num), Parent(parent), Letters(0), Visited(false) {}
     };
@@ -20,18 +20,18 @@ private:
     TreeNode* root;
 
 public:
-    void ReadFile(string Filename);                                 //Чтение файла
-    void AddNode(int Parent, int Children, int Letters);            //Добавить элемент в список
-    TreeNode* FindNode(int Number, TreeNode* node);                 //Найти нужный узел (С нужным номером)
+    void ReadFile(string Filename);                                 //Р§С‚РµРЅРёРµ С„Р°Р№Р»Р°
+    void AddNode(int Parent, int Children, int Letters);            //Р”РѕР±Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ СЃРїРёСЃРѕРє
+    TreeNode* FindNode(int Number, TreeNode* node);                 //РќР°Р№С‚Рё РЅСѓР¶РЅС‹Р№ СѓР·РµР» (РЎ РЅСѓР¶РЅС‹Рј РЅРѕРјРµСЂРѕРј)
 
-    int Deliver(vector<int>& letters);                              //Доставка почты и подсчет извинений
+    int Deliver(vector<int>& letters);                              //Р”РѕСЃС‚Р°РІРєР° РїРѕС‡С‚С‹ Рё РїРѕРґСЃС‡РµС‚ РёР·РІРёРЅРµРЅРёР№
 
-    void PrintInFile(int k, string outputFile);                     //Вывод результата в файл
+    void PrintInFile(int k, string outputFile);                     //Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ С„Р°Р№Р»
 };
 
 class Veify {
 public:
     Veify() {}
 
-    bool Number(string& x);                                         //Проверка на число
+    bool Number(string& x);                                         //РџСЂРѕРІРµСЂРєР° РЅР° С‡РёСЃР»Рѕ
  };
